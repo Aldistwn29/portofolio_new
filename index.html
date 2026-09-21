@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="id" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="description" content="Portofolio Aldi Setiawan — proyek pengembangan web, proses belajar, dan eksplorasi React, TypeScript, dan Tailwind CSS." />
+    <meta name="theme-color" content="#292524" />
+    <link rel="canonical" href="https://example.com/" />
+    <meta property="og:site_name" content="Portofolio Aldi Setiawan" />
+    <meta property="og:locale" content="id_ID" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Portofolio Aldi Setiawan" />
+    <meta property="og:description" content="Portofolio Aldi Setiawan — proyek pengembangan web, proses belajar, dan eksplorasi React, TypeScript, dan Tailwind CSS." />
+    <meta property="og:url" content="https://example.com/" />
+    <meta property="og:image" content="https://example.com/og-default.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Portofolio Aldi Setiawan" />
+    <meta name="twitter:description" content="Portofolio Aldi Setiawan — proyek pengembangan web, proses belajar, dan eksplorasi React, TypeScript, dan Tailwind CSS." />
+    <meta name="twitter:image" content="https://example.com/og-default.svg" />
+    <!--
+      GANTI https://example.com dengan domain produksi sebelum build final:
+      SITE_URL=https://domain-anda.com npm run build
+      (skrip scripts/prerender.mjs menyelaraskan ulang URL statis ini otomatis).
+      Crawler/share yang tidak mengeksekusi JS membaca meta statis ini dan
+      file prerender dist/projects/<id>/index.html — bukan meta Helmet dinamis.
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@200..800&family=JetBrains+Mono:wght@100..800&family=Plus+Jakarta+Sans:wght@200..800&display=swap"
+      rel="stylesheet"
+    />
+    <title>Portofolio Aldi Setiawan</title>
+    <!--
+      Terapkan tema tersimpan sebelum render pertama agar tidak ada flash
+      (FOUC): localStorage > prefers-color-scheme > dark (default).
+      Harus inline di sini, bukan di bundle JS yang dimuat belakangan.
+    -->
+    <script>
+      try {
+        var stored = localStorage.getItem('portfolio-theme');
+        var theme = stored === 'light' || stored === 'dark'
+          ? stored
+          : (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.classList.toggle('light', theme === 'light');
+        document.documentElement.classList.toggle('dark', theme === 'dark');
+        document.querySelector('meta[name="theme-color"]').setAttribute(
+          'content', theme === 'light' ? '#fafafa' : '#292524');
+      } catch (e) { /* default dark tetap berlaku */ }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
