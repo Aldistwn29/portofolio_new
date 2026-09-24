@@ -24,15 +24,16 @@ Single-page app (BrowserRouter, tanpa SSR):
 /                 Home — hero, about (tentang saya), experience,
                   tech-stack, overview proyek (maks 4 featured, grid 2x2)
                   + anchor #home #about #experience #stack #projects
-/projects          Showcase semua proyek (grid kartu persegi)
+/projects          Showcase semua proyek (grid kartu landscape 16:9)
 /projects/:id     Detail proyek (breadcrumb, konten penuh, terkait, OG per proyek)
 /lainnya          Halaman 404
 ```
 
 Klik kartu mana pun (home maupun `/projects`) membuka halaman detail
-`/projects/:id` — tanpa popup/dialog. Overview home dibatasi 4 featured
-dengan tombol "Lihat semua proyek" menuju `/projects`; sub-heading overview
-rata tengah; ada jarak lega antara grid dan footer.
+`/projects/:id` — tanpa popup/dialog. Overview home menampilkan maks 4
+featured dalam grid 2x2 dengan tombol "Explore Projects" (selalu tampil bila
+ada proyek) menuju `/projects`; sub-heading overview rata tengah; ada jarak
+lega antara grid dan footer.
 
 Navigasi utama berbasis route: hanya Beranda (`/`) dan Proyek (`/projects`),
 dengan status aktif dari `NavLink` (Beranda memakai `end`). Desktop menampilkannya sebagai pill;
@@ -61,7 +62,9 @@ src/
                         projects-overview
       index.ts          Barrel section-section home
     projects/
-      components/       project-card (link ke /projects/:id),
+      components/       project-card (article: gambar/judul link ke
+                        /projects/:id + ikon demo/GitHub opsional),
+                        project-links (ikon Demo online + GitHub, null bila kosong)
                         project-detail-dialog dihapus (detail jadi halaman)
       data/projects.ts  Konten proyek statis
       types.ts          Tipe Project (colocated dengan domainnya)
@@ -155,7 +158,7 @@ Variabel spacing navigasi di `index.css` menjaga konten/footer tetap terlihat da
 - `features/profile/data/profile.ts`: ubah `greeting` (sapaan h1 hero), `role`, `location`, `photo` (hasil import dari `src/assets/images/profile/`), `about`, dan `education[]` (`school`, `schoolUrl?`, `logo?`, `degree`, `period`). Tambahkan `email`, isi `socialLinks` dengan `{ label, url, icon }` menggunakan URL HTTPS akun asli (`icon` salah satu dari `'github' | 'linkedin' | 'email'`). Field kosong tidak menghasilkan link/gambar palsu (sosial tetap ada di footer + desktop pill).
 - `features/profile/data/experience.ts`: tambah pengalaman `{ id, company, companyUrl?, logo?, role, period, description, highlights?[], technologies[] }` — ID unik. `description` tampil sebagai ringkasan; logo perusahaan tidak ditampilkan di timeline (hanya thumbnail kecil di education-card bila `logo` diisi).
 - `features/profile/data/tech-stack.ts`: isi teknologi per kategori; tampil sebagai satu pill cloud (kategori tidak ditampilkan, tetap disimpan untuk pemakaian mendatang).
-- `features/projects/data/projects.ts`: tambahkan proyek dengan ID unik, deskripsi, detail, teknologi. Yang dirender kartu: `image` (square), judul, deskripsi (2 baris), 3 teknologi pertama; klik kartu membuka halaman detail yang merender `details`, `highlights`, semua teknologi, `demoUrl`/`sourceUrl`, dan `period`. Set `featured: true` agar tampil di home (maks 4, halaman `/projects` menampilkan semua).
+- `features/projects/data/projects.ts`: tambahkan proyek dengan ID unik, deskripsi, detail, teknologi. Yang dirender kartu: `image` (landscape 16:9), judul (link detail), deskripsi (2 baris), 3 teknologi pertama, footer berisi link "Lihat detail" + ikon Demo online/GitHub opsional dari `demoUrl`/`sourceUrl` (tidak tampil bila kosong); klik kartu membuka halaman detail yang merender `details`, `highlights`, semua teknologi, `demoUrl`/`sourceUrl`, dan `period`. Set `featured: true` agar tampil di home (maks 4, halaman `/projects` menampilkan semua).
 - `public/icons.svg`: sprite ikon brand (GitHub, LinkedIn) via `<use>`; gunakan `fill="currentColor"` agar mengikuti tema. Email memakai ikon `Mail` lucide-react.
 - Untuk screenshot, tambahkan file ke `src/assets/images/projects/`, impor di `projects.ts`, lalu gunakan hasil import sebagai `image`.
 - `src/config/navigation.ts`: `navigation` (2 route: `/`, `/projects`) untuk nav utama; `sectionLinks` (Tentang, Pengalaman, Stack via `/#id`) untuk quick-link footer.
@@ -192,7 +195,7 @@ terpengaruh (tree-shaken), dan wrapper tetap tersedia bila nanti butuh modal.
 3. Pada lebar < 768 px, periksa header atas (brand kiri + hamburger kanan) dan bottom bar (2 link Beranda + Proyek dengan ikon, tanpa Tema): indikator aktif benar di keduanya, area aman perangkat, dan footer/konten tidak tertutup bar. Buka hamburger: dropdown tampil di kanan atas dengan link Beranda/Proyek (teks, indikator aktif benar) dan toggle Tema. Pada lebar >= 768 px, periksa pill Beranda + Proyek beserta toggle tema di ujungnya. Hanya navigasi yang terlihat yang boleh menerima fokus Tab.
 4. Dropdown hamburger: Escape menutup dan mengembalikan fokus ke tombol hamburger, klik di luar menutup, klik link mana pun menutup. Jika preferensi reduced motion aktif, tidak ada animasi berlebihan.
 5. Toggle Tema (ikon Matahari/Bulan): klik harus mengganti seluruh palet terang/gelap tanpa reload, pilihan tersimpan di localStorage, dan menghormati preferensi OS pada kunjungan pertama. Reload halaman tidak boleh menampilkan flash tema yang salah.
-6. Home tampil sempit terpusat (max-w-3xl): hero foto/inisial + sapaan + role + pill lokasi; about border-l + edukasi; experience timeline dot; tech-stack satu pill cloud; overview maks 4 kartu persegi (maks 2 kolom) dengan sub-heading rata tengah dan jarak lega ke footer; klik kartu membuka halaman detail.
+6. Home tampil sempit terpusat (max-w-3xl): hero foto/inisial + sapaan + role + pill lokasi; about border-l + edukasi; experience timeline dot; tech-stack satu pill cloud; overview maks 4 kartu landscape (maks 2 kolom) dengan sub-heading rata tengah dan jarak lega ke footer; klik kartu membuka halaman detail.
 7. Buka halaman penuh `/projects`: semua proyek tampil dalam grid. Buka `/projects/<id>`: breadcrumb (Beranda / Proyek / ...), konten detail (gambar, deskripsi, highlights, teknologi, Demo/Source), proyek terkait, dan judul tab harus benar. Buka `/projects/tidak-ada`: halaman 404 dengan layout tampil.
 8. Pindah route antar halaman: fokus harus ke heading (h1) dan live region mengumumkan judul halaman.
 9. Dari halaman detail/proyek, klik Beranda lalu quick-link footer (Tentang, Pengalaman, Stack): harus kembali ke home lalu scroll ke section target.

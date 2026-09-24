@@ -11,8 +11,14 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://example.com/projects/portfolio</loc>
-    <lastmod>2026-09-21</lastmod>
+    <loc>https://example.com/projects/finledger</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://example.com/projects/edusmart</loc>
+    <lastmod>2026-09-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

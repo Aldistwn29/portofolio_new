@@ -23,11 +23,11 @@ export function ProjectsOverviewSection() {
             <div className="grid gap-4 sm:grid-cols-2">
               {featured.map((project) => <ProjectCard key={project.id} project={project} />)}
             </div>
-            {featured.length < projects.length && (
+            <div className="flex justify-center pt-2">
               <RouterButtonLink to="/projects" variant="outline">
-                Lihat semua proyek <ArrowUpRight size={16} aria-hidden="true" />
+                Explore Projects <ArrowUpRight size={16} aria-hidden="true" />
               </RouterButtonLink>
-            )}
+            </div>
           </>
         ) : (
           <p className="text-sm text-muted-foreground">Proyek akan ditambahkan di sini.</p>
