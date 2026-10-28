@@ -15,7 +15,32 @@ export const projects: Project[] = [
     sourceUrl: 'https://github.com/Aldistwn29/finledger',
     featured: true,
   },
-
+  {
+    id: 'uloans',
+    title: 'ULoans Loan Application Platform',
+    description:
+      'A full-stack digital loan application platform that allows users to register, authenticate, submit loan applications, monitor application status, and cancel eligible pending applications.',
+    details:
+      'ULoans helps customers manage the loan application process through a simple and responsive web interface. I built the frontend using React and Vite, with protected routes for authenticated users and dedicated flows for loan applications, loan history, loan details, and cancellation requests. The backend is powered by Express.js and provides RESTful APIs for authentication, user profiles, and loan management. Prisma and PostgreSQL are used for database persistence, while JWT authentication protects private API endpoints and ensures that users can only access their own loan data. The application is prepared for deployment with the frontend hosted on Vercel and the backend deployable to a Node.js hosting platform.',
+    technologies: [
+      'React',
+      'Vite',
+      'JavaScript',
+      'React Router',
+      'Axios',
+      'Tailwind CSS',
+      'Node.js',
+      'Express.js',
+      'Prisma',
+      'PostgreSQL',
+      'JWT Authentication',
+      'Vercel'
+    ],
+    image: '/images/projects/Uloans.png',
+    demoUrl: 'https://uloans-frontend.vercel.app',
+    sourceUrl: 'https://github.com/Aldistwn29/Uloans-app-fullstack',
+    featured: true,
+  },
   {
     id: 'edusmart',
     title: 'Edusmart',
